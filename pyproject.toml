@@ -1,0 +1,17 @@
+[project]
+name = "cs150_project"
+version = "1.0.0"
+description = "Final project for Tyler Hammerling and Tristan Tew"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "openai",
+    "pydantic"
+
+]
+
+[dependency-groups]
+dev = [
+    "pytest",
+]
+
