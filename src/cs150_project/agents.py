@@ -1,8 +1,11 @@
 import random
 from openai import OpenAI
+from dotenv import load_dotenv
 from models import SplitterResponse, ResponderResponse
 from src.cs150_project.models import ChatterResponse
 
+# load token from env variables
+load_dotenv()
 
 class BaseUltimatumAgent:
     def __init__(self, role:str, strategy:str):
@@ -85,7 +88,6 @@ class OpenAIUltimatumAgent(BaseUltimatumAgent):
 
         ## used for chaining responses/context windows over time
         self.previous_response_id = None
-
 
     def update_response_id(self, response:object):
         """Given response object from OpenAI extract the session ID and hook it up so this isn't one shot

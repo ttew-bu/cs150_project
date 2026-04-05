@@ -5,9 +5,10 @@ description = "Final project for Tyler Hammerling and Tristan Tew"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "ipykernel>=7.2.0",
     "openai",
-    "pydantic"
-
+    "pydantic",
+    "python-dotenv"
 ]
 
 [dependency-groups]
