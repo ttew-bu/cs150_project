@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cs150_project"
+version = "1.0.0"
+description = "Final project for Tyler Hammerling and Tristan Tew"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "ipykernel>=7.2.0",
+    "openai",
+    "pydantic",
+    "python-dotenv"
+]
+
+[dependency-groups]
+dev = [
+    "pytest",
+]
+
+[project.scripts]
+demo-llm-flow = "cs150_project.game_runner:run_demo_llm_flow"
+
