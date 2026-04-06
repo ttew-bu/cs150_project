@@ -16,3 +16,6 @@ dev = [
     "pytest",
 ]
 
+[project.scripts]
+demo_llm_flow = "cs150_project.main:game_runner:run_demo_llm_flow"
+
