@@ -65,8 +65,8 @@ class UltimatumGameInstance:
                 hearing_prompt + responder_comment, round_chat_logs
             )
 
-        split = self.splitter.choose_split()
-        validated_split = self.validate_split(split, round_chat_logs)
+        split = self.splitter.choose_split(round_chat_logs)
+        validated_split = self.validate_split(split)
 
         ## if we want, enable "mid-game chatter?"
         if self.comms_allowed:
