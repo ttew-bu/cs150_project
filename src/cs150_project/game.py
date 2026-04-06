@@ -66,7 +66,7 @@ class UltimatumGameInstance:
             )
 
         split = self.splitter.choose_split()
-        validated_split = self.validate_split(split)
+        validated_split = self.validate_split(split, round_chat_logs)
 
         ## if we want, enable "mid-game chatter?"
         if self.comms_allowed:
@@ -96,7 +96,7 @@ class UltimatumGameInstance:
             )
 
         ## if we want, enable "post-game chatter?"
-        response = self.responder.choose_response(validated_split)
+        response = self.responder.choose_response(validated_split, round_chat_logs)
         ## if we want, enable "mid-game chatter?"
         if self.comms_allowed:
             ## responder gets to speak first this time
