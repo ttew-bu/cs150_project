@@ -15,14 +15,17 @@ Ensure you have a .env file or environment variable set for OPENAI_API_KEY
 for the demo runner to automatically pick this up.
 
 If you don't have uv installed:
-* pip install uv *
+```
+pip install uv
+```
 
-With uv installed, you can install dependencies + create a virtualenv using:
-uv sync (in the root dir)
+With uv installed, you can install dependencies + create a virtualenv in the root dir using:
+```uv sync```
+
 
 Initiate the test runner using:
-uv run play_demo_openai_game 
+```uv run play_demo_openai_game```
 
 OR 
 
-uv run play_demo_heuristic_game
+```uv run play_demo_heuristic_game```
