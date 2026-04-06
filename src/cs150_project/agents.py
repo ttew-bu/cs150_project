@@ -131,14 +131,13 @@ class OpenAIUltimatumAgent(BaseUltimatumAgent):
                 instructions=self.system_prompt,
             )
 
-        print(response.output_parsed)
         self.update_response_id(response)
-        if round_chat_logs:
+        if type(round_chat_logs) == list:
             round_chat_logs.append(
                 {
                     "agent": self.role,
                     "function": "choose_split",
-                    "reason": response.output_parsed.reasoning,
+                    "reason": response.output_parsed.reason,
                     "value": response.output_parsed.value,
                 }
             )
@@ -165,13 +164,13 @@ class OpenAIUltimatumAgent(BaseUltimatumAgent):
                 text_format=ResponderResponse,
                 instructions=self.system_prompt,
             )
-        print(response.output_parsed)
-        if round_chat_logs:
+
+        if type(round_chat_logs) == list:
             round_chat_logs.append(
                 {
                     "agent": self.role,
                     "function": "choose_response",
-                    "reason": response.output_parsed.reasoning,
+                    "reason": response.output_parsed.reason,
                     "value": response.output_parsed.value,
                 }
             )
@@ -204,13 +203,13 @@ class OpenAIUltimatumAgent(BaseUltimatumAgent):
         self.update_response_id(response)
 
         # store ordered chat logs for analysis if we see interesting emerging trends
-        print(response.output_parsed)
-        if round_chat_logs:
+
+        if type(round_chat_logs) == list:
             round_chat_logs.append(
                 {
                     "agent": self.role,
-                    "function": "choose_split",
-                    "reason": response.output_parsed.reasoning,
+                    "function": "generate_freeform_chatter",
+                    "reason": response.output_parsed.reason,
                     "value": response.output_parsed.value,
                 }
             )
@@ -236,16 +235,6 @@ class OpenAIUltimatumAgent(BaseUltimatumAgent):
                 input=message,
                 previous_response_id=self.previous_response_id,
                 instructions=self.system_prompt,
-            )
-
-        if round_chat_logs:
-            round_chat_logs.append(
-                {
-                    "agent": self.role,
-                    "function": "accept_freeform_chatter",
-                    "reason": response.output_parsed.reasoning,
-                    "value": response.output_parsed.value,
-                }
             )
 
         self.update_response_id(response)
