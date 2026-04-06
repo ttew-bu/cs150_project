@@ -1,3 +1,7 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "cs150_project"
 version = "1.0.0"
@@ -17,5 +21,5 @@ dev = [
 ]
 
 [project.scripts]
-demo_llm_flow = "cs150_project.main:game_runner:run_demo_llm_flow"
+demo-llm-flow = "cs150_project.game_runner:run_demo_llm_flow"
 

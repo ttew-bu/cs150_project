@@ -142,7 +142,10 @@ class UltimatumGameInstance:
         for history and communication allowance"""
         # treat this as 1-indexed instead of 0-indexed
         for round_number in range(1, self.rounds + 1):
+            print(f"starting round: {round_number}")
             self.play_round(round_number)
+            print(f"ending round: {round_number}")
+            print("result is: " + str(self.results[round_number - 1]))
 
         data = {
             "results": self.results,
