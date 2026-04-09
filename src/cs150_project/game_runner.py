@@ -10,7 +10,7 @@ from .game import UltimatumGameInstance
 
 
 def run_demo_llm_flow():
-    """Run demo flow and print out results json block"""
+    """Run demo flow and print out results json block. """
 
     # initialize agents w/ roles
     responder = OpenAIUltimatumAgent(

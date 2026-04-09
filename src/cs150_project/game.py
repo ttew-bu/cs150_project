@@ -10,7 +10,9 @@ class UltimatumGameInstance:
         splitter: BaseUltimatumAgent,
         responder: BaseUltimatumAgent,
         rounds: int = 10,
-        comms_allowed: bool = False,
+        pregame_comms_allowed: bool = False,
+        midgame_comms_allowed: bool = False,
+        postgame_comms_allowed: bool = False,
         store_results_path: str = None,
     ):
         self.splitter = splitter
@@ -18,7 +20,9 @@ class UltimatumGameInstance:
         self.rounds = rounds
 
         ## for the LLMs, do we allow them to talk freely? if so we need a bool to cover that
-        self.comms_allowed = comms_allowed
+        self.pregame_comms_allowed = pregame_comms_allowed
+        self.midgame_comms_allowed = midgame_comms_allowed
+        self.postgame_comms_allowed = postgame_comms_allowed
         self.results = []
         self.store_results_path = store_results_path
 
@@ -36,7 +40,7 @@ class UltimatumGameInstance:
         round_chat_logs = []
 
         ## if we want, enable "pre-chatter?"
-        if self.comms_allowed:
+        if self.pregame_comms_allowed:
             ## splitter gets to speak first
             freeform_prompt = """We are allowing you the {splitter|responder} to say something before split decision is
             made to the other agent. In 2-3 sentences max, what would you like to say to them? Recall that your goal
@@ -69,7 +73,7 @@ class UltimatumGameInstance:
         validated_split = self.validate_split(split)
 
         ## if we want, enable "mid-game chatter?"
-        if self.comms_allowed:
+        if self.midgame_comms_allowed:
             ## responder gets to speak first this time
             freeform_prompt = """We are allowing you the {splitter|responder} to say something after the split decision and before the accept decision is
                     made to the other agent. In 2-3 sentences max, what would you like to say to them? Recall that your goal
@@ -98,7 +102,7 @@ class UltimatumGameInstance:
         ## if we want, enable "post-game chatter?"
         response = self.responder.choose_response(validated_split, round_chat_logs)
         ## if we want, enable "mid-game chatter?"
-        if self.comms_allowed:
+        if self.postgame_comms_allowed:
             ## responder gets to speak first this time
             freeform_prompt = """We are allowing you the {splitter|responder} to say something after this round has played out.
                             The result was a split of {} which was {} accepted. Given this information, say something to the

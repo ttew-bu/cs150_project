@@ -1,6 +1,7 @@
 import random
 from openai import OpenAI
 from dotenv import load_dotenv
+from .llm_proxy_starter import LLMProxy
 from .models import ChatterResponse, SplitterResponse, ResponderResponse
 
 
@@ -238,3 +239,115 @@ class OpenAIUltimatumAgent(BaseUltimatumAgent):
             )
 
         self.update_response_id(response)
+
+
+class TuftsLLMProxyAgent(BaseUltimatumAgent):
+    """Actual agent used in project after being given API credentials
+
+    Effectively a port of OpenAIUltimatumAgent to the Tufts LLM proxy framework"""
+
+    def __init__(self, role:str, strategy:str, system_prompt:str, turn_prompt:str, model:str, session_id:str=None):
+        super().__init__(role, strategy)
+        self.system_prompt = (
+            system_prompt  ## we need to define the game state, rules etc.
+        )
+        self.turn_prompt = turn_prompt
+        self.client = LLMProxy()
+        self.model = model
+
+        ## slight diff from OpenAI implementation. Set explicit, game-based ID
+        self.session_id = session_id
+
+
+    def choose_split(self, round_chat_logs: list[str] = None) -> None | float:
+        """Given the agent's prompt (which should indiciate its role as a splitter),
+        determine how to split the pot"""
+        response = self.client.generate(
+            model=self.model,
+            query=self.turn_prompt,
+            output_schema=SplitterResponse,
+            session_id=self.session_id,
+            system=self.system_prompt,
+        )
+
+        if type(round_chat_logs) == list:
+            round_chat_logs.append(
+                {
+                    "agent": self.role,
+                    "session_id": self.session_id,
+                    "function": "choose_split",
+                    "reason": response.output_parsed.reason,
+                    "value": response.output_parsed.value,
+                }
+            )
+
+        return response.values()
+
+
+    def choose_response(self, offer: float, round_chat_logs: list[str] = None) -> bool:
+        """Given an agent's offer split, use the baked in turn prompt and system prompt
+        to determine some outcome. Returns a bool whether or not the offer's accepted"""
+
+        response = self.client.generate(
+            model=self.model,
+            query=self.turn_prompt,
+            output_schema=SplitterResponse,
+            session_id=self.session_id,
+            system=self.system_prompt,
+        )
+
+        if type(round_chat_logs) == list:
+            round_chat_logs.append(
+                {
+                    "agent": self.role,
+                    "session_id": self.session_id,
+                    "function": "choose_response",
+                    "reason": response.output_parsed.reason,
+                    "value": response.output_parsed.value,
+                }
+            )
+
+        return response.values()
+
+    def generate_freeform_chatter(
+        self, message: str, round_chat_logs: list[str] = None
+    ) -> str:
+        """Helper function which allows an agent to send a verbal message to another outside
+        the scope of the game functions of 'split' and 'accept|not' to see if more complex behaviors arise
+        """
+
+        response = self.client.generate(
+            model=self.model,
+            query=self.turn_prompt,
+            output_schema=ChatterResponse,
+            session_id=self.session_id,
+            system=self.system_prompt,
+        )
+
+        if type(round_chat_logs) == list:
+            round_chat_logs.append(
+                {
+                    "agent": self.role,
+                    "session_id": self.session_id,
+                    "function": "generate_freeform_chatter",
+                    "reason": response.output_parsed.reason,
+                    "value": response.output_parsed.value,
+                }
+
+            )
+
+        return response.values()
+
+    def accept_freeform_chatter(
+        self, message: str, round_chat_logs: list[str] = None
+    ) -> None:
+        """Helper function which establishes a hear-only functionality
+        that stores another agents comments in the context window for our agent"""
+
+        ## todo, verify w/ status code that this goes through?
+        self.client.generate(
+            model=self.model,
+            query=self.turn_prompt,
+            session_id=self.session_id,
+            system=self.system_prompt,
+        )
