@@ -6,11 +6,9 @@ class SplitterResponse(BaseModel):
     value: float
     reason: str
 
-
 class ResponderResponse(BaseModel):
     value: bool
     reason: str
-
 
 class ChatterResponse(BaseModel):
     value: str

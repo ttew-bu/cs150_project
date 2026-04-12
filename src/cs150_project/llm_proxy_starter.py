@@ -199,6 +199,8 @@ class LLMProxy:
             "media": media_refs,
         }
 
+        print(payload)
+
         res = self._post_json("call", payload)
         if "error" in res:
             return res
