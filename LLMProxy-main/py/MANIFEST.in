@@ -1,4 +1,0 @@
-include README.md
-include pyproject.toml
-recursive-include examples *.py
-recursive-include examples *.pdf
