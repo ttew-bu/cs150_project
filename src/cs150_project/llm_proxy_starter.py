@@ -17,17 +17,16 @@ from urllib3.util.retry import Retry
 
 from dotenv import load_dotenv
 
-
 # -----------------------
 # Config & HTTP utilities
 # -----------------------
+
 
 @dataclass(frozen=True)
 class ClientConfig:
     endpoint: str
     api_key: str
     timeout: float = 118.0  # seconds, applied to both connect & read
-
 
     @staticmethod
     def from_env() -> "ClientConfig":
@@ -37,7 +36,7 @@ class ClientConfig:
         load_dotenv(dotenv_path=cwd_env, override=True)
 
         endpoint = os.getenv("LLMPROXY_ENDPOINT")
-        api_key  = os.getenv("LLMPROXY_API_KEY")
+        api_key = os.getenv("LLMPROXY_API_KEY")
 
         if not endpoint or not api_key:
             raise ValueError(
@@ -50,8 +49,6 @@ class ClientConfig:
             )
 
         return ClientConfig(endpoint=endpoint, api_key=api_key)
-
-
 
 
 def _build_session() -> requests.Session:
@@ -76,12 +73,15 @@ def _build_session() -> requests.Session:
 # Core client
 # -----------------------
 
+
 class LLMProxy:
     def __init__(self) -> None:
         self.config = ClientConfig.from_env()
         self.session = _build_session()
 
-    def _headers(self, request_type: str, extra: Optional[Dict[str, str]] = None) -> Dict[str, str]:
+    def _headers(
+        self, request_type: str, extra: Optional[Dict[str, str]] = None
+    ) -> Dict[str, str]:
         base = {
             "x-api-key": self.config.api_key,
             "request_type": request_type,
@@ -113,7 +113,10 @@ class LLMProxy:
                 return resp.json()
             except ValueError:
                 # JSON decode failed; return text for visibility
-                return {"error": "Invalid JSON in response", "status_code": resp.status_code}
+                return {
+                    "error": "Invalid JSON in response",
+                    "status_code": resp.status_code,
+                }
         else:
             # Try to surface server-provided error details
             detail: str
@@ -121,7 +124,10 @@ class LLMProxy:
                 detail = resp.json().get("error", resp.text)
             except ValueError:
                 detail = resp.text
-            return {"error": f"HTTP {resp.status_code}: {detail}", "status_code": resp.status_code}
+            return {
+                "error": f"HTTP {resp.status_code}: {detail}",
+                "status_code": resp.status_code,
+            }
 
     # -------- Public methods --------
 
@@ -225,7 +231,11 @@ class LLMProxy:
 
         if mime_type is None:
             # Minimal sniffing; caller can override
-            mime_type = "application/pdf" if path.suffix.lower() == ".pdf" else "application/octet-stream"
+            mime_type = (
+                "application/pdf"
+                if path.suffix.lower() == ".pdf"
+                else "application/octet-stream"
+            )
 
         params = {
             "description": description,
@@ -262,7 +272,10 @@ class LLMProxy:
                 detail = resp.json().get("error", resp.text)
             except ValueError:
                 detail = resp.text
-            return {"error": f"HTTP {resp.status_code}: {detail}", "status_code": resp.status_code}
+            return {
+                "error": f"HTTP {resp.status_code}: {detail}",
+                "status_code": resp.status_code,
+            }
 
     def upload_init(
         self,
@@ -291,9 +304,17 @@ class LLMProxy:
         """
         path = Path(file_path)
         if not path.exists():
-            return {"ok": False, "error": f"File not found: {path}", "status_code": None}
+            return {
+                "ok": False,
+                "error": f"File not found: {path}",
+                "status_code": None,
+            }
 
-        resolved_content_type = content_type or mimetypes.guess_type(path.name)[0] or "application/octet-stream"
+        resolved_content_type = (
+            content_type
+            or mimetypes.guess_type(path.name)[0]
+            or "application/octet-stream"
+        )
 
         try:
             with path.open("rb") as f:
@@ -372,7 +393,10 @@ class LLMProxy:
             return {"error": f"File not found: {path}", "status_code": None}
 
         if not content_type:
-            return {"error": "content_type is required (for example: image/jpeg)", "status_code": None}
+            return {
+                "error": "content_type is required (for example: image/jpeg)",
+                "status_code": None,
+            }
 
         resolved_content_type = content_type
         size_bytes = path.stat().st_size
@@ -470,7 +494,6 @@ class LLMProxy:
         }
         params = {k: v for k, v in params.items() if v is not None}
 
-
         files = {
             "params": (None, json.dumps(params), "application/json"),
             "text": (None, text, "application/text"),
@@ -496,4 +519,7 @@ class LLMProxy:
                 detail = resp.json().get("error", resp.text)
             except ValueError:
                 detail = resp.text
-            return {"error": f"HTTP {resp.status_code}: {detail}", "status_code": resp.status_code}
+            return {
+                "error": f"HTTP {resp.status_code}: {detail}",
+                "status_code": resp.status_code,
+            }

@@ -1,13 +1,13 @@
 import random
 from openai import OpenAI
 import uuid
-from dotenv import load_dotenv
+import json
 from .llm_proxy_starter import LLMProxy
 from .models import ChatterResponse, SplitterResponse, ResponderResponse
 
 
 class BaseUltimatumAgent:
-    def __init__(self, role: str, strategy: str, name:str, switch_roles:bool=False):
+    def __init__(self, role: str, strategy: str, name: str, switch_roles: bool = False):
         self.role = role
         self.strategy = strategy
         self.name = name
@@ -27,18 +27,22 @@ class BaseUltimatumAgent:
         point about this in reviewing the initial code as a key game mechanic; since this function
         is agent implementation agnostic, it is okay to include in all child classes"""
 
-        if self.role == 'splitter':
-            self.role = 'responder'
+        if self.role == "splitter":
+            self.role = "responder"
 
-        elif self.role == 'responder':
-            self.role = 'splitter'
+        elif self.role == "responder":
+            self.role = "splitter"
 
         ## not sure where this would come up, but it should fatally end the simulation if reached
         else:
-            raise ValueError("Simulation Error: update_role tried to switch to something that isn't splitter or responder!")
+            raise ValueError(
+                "Simulation Error: update_role tried to switch to something that isn't splitter or responder!"
+            )
+
 
 class UnsophisticatedUltimatumAgent(BaseUltimatumAgent):
     """Agent which handles very basic rule-based splits to ensure game framework works"""
+
     def __init__(self, role: str, strategy: str, fixed_ratio: float = None):
         super().__init__(role, strategy)
         self.fixed_ratio = fixed_ratio
@@ -78,16 +82,17 @@ class UnsophisticatedUltimatumAgent(BaseUltimatumAgent):
                 f"Strategy {self.strategy} not yet implemented, please use a valid strategy!"
             )
 
+
 class OpenAIUltimatumAgent(BaseUltimatumAgent):
     def __init__(
         self,
         role: str,
         strategy: str,
-        name:str,
+        name: str,
         system_prompt: str,
         responder_turn_prompt: str,
         splitter_turn_prompt: str,
-        model: str = "gpt-5.4", ## using OpenAI to demo code
+        model: str = "gpt-5.4",  ## using OpenAI to demo code
         api_key: str = None,
     ):
 
@@ -255,15 +260,15 @@ class TuftsLLMProxyAgent(BaseUltimatumAgent):
     with session_id handling instead of chained messages in the Responses framework"""
 
     def __init__(
-            self,
-            role: str,
-            strategy: str,
-            name: str,
-            system_prompt: str,
-            responder_turn_prompt: str,
-            splitter_turn_prompt: str,
-            model: str = "gpt-5.4",  ## using OpenAI to demo code
-            session_id: str = None,
+        self,
+        role: str,
+        strategy: str,
+        name: str,
+        system_prompt: str,
+        responder_turn_prompt: str,
+        splitter_turn_prompt: str,
+        model: str = "gpt-5.4",  ## using OpenAI to demo code
+        session_id: str = None,
     ):
 
         # in this agent strategy is pretty much just an internal tracker for the prompt versions and such
@@ -277,18 +282,22 @@ class TuftsLLMProxyAgent(BaseUltimatumAgent):
         self.model = model
 
         ## used for chaining responses/context windows over time
-        self.session_id = session_id or uuid.uuid4()
-
+        self.session_id = session_id or str(uuid.uuid4())
 
     def choose_split(self, round_chat_logs: list[str] = None) -> None | float:
         """Given the agent's prompt (which should indiciate its role as a splitter),
         determine how to split the pot"""
         response = self.client.generate(
             model=self.model,
-            query=self.turn_prompt,
+            query=self.splitter_turn_prompt,
             output_schema=SplitterResponse,
             session_id=self.session_id,
             system=self.system_prompt,
+        )
+
+        json_response = json.loads(response["result"])
+        formatted_response = SplitterResponse(
+            value=json_response["value"], reason=json_response["reason"]
         )
 
         if type(round_chat_logs) == list:
@@ -298,24 +307,28 @@ class TuftsLLMProxyAgent(BaseUltimatumAgent):
                     "current_role": self.role,
                     "session_id": self.session_id,
                     "function": "choose_split",
-                    "reason": response.output_parsed.reason,
-                    "value": response.output_parsed.value,
+                    "reason": formatted_response.reason,
+                    "value": formatted_response.value,
                 }
             )
 
-        return response.values()
-
+        return formatted_response.value
 
     def choose_response(self, offer: float, round_chat_logs: list[str] = None) -> bool:
         """Given an agent's offer split, use the baked in turn prompt and system prompt
-        to determine some outcome. Returns a bool whether or not the offer's accepted"""
+        to determine some outcome. Returns a bool whether the offer's accepted"""
 
         response = self.client.generate(
             model=self.model,
-            query=self.turn_prompt,
-            output_schema=SplitterResponse,
+            query=self.responder_turn_prompt.format(offer=offer),
+            output_schema=ResponderResponse,
             session_id=self.session_id,
             system=self.system_prompt,
+        )
+
+        json_response = json.loads(response["result"])
+        formatted_response = ResponderResponse(
+            value=json_response["value"], reason=json_response["reason"]
         )
 
         if type(round_chat_logs) == list:
@@ -325,12 +338,12 @@ class TuftsLLMProxyAgent(BaseUltimatumAgent):
                     "current_role": self.role,
                     "session_id": self.session_id,
                     "function": "choose_response",
-                    "reason": response.output_parsed.reason,
-                    "value": response.output_parsed.value,
+                    "reason": formatted_response.reason,
+                    "value": formatted_response.value,
                 }
             )
 
-        return response.values()
+        return formatted_response.value
 
     def generate_freeform_chatter(
         self, message: str, round_chat_logs: list[str] = None
@@ -347,6 +360,11 @@ class TuftsLLMProxyAgent(BaseUltimatumAgent):
             system=self.system_prompt,
         )
 
+        json_response = json.loads(response["result"])
+        formatted_response = ChatterResponse(
+            value=json_response["value"], reason=json_response["reason"]
+        )
+
         if type(round_chat_logs) == list:
             round_chat_logs.append(
                 {
@@ -354,13 +372,12 @@ class TuftsLLMProxyAgent(BaseUltimatumAgent):
                     "current_role": self.role,
                     "session_id": self.session_id,
                     "function": "generate_freeform_chatter",
-                    "reason": response.output_parsed.reason,
-                    "value": response.output_parsed.value,
+                    "reason": formatted_response.reason,
+                    "value": formatted_response.value,
                 }
-
             )
 
-        return response.values()
+        return formatted_response.value
 
     def accept_freeform_chatter(
         self, message: str, round_chat_logs: list[str] = None
@@ -375,4 +392,3 @@ class TuftsLLMProxyAgent(BaseUltimatumAgent):
             session_id=self.session_id,
             system=self.system_prompt,
         )
-

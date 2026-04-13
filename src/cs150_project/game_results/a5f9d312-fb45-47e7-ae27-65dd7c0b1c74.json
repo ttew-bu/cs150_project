@@ -1,0 +1,83 @@
+{
+    "results": [
+        {
+            "round": 1,
+            "split": 0.9,
+            "accepted": false,
+            "splitter_index": 0,
+            "chat_logs": [
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "splitter",
+                    "session_id": "6497db0c-2029-4fe4-8313-96a7ab01dd0b",
+                    "function": "choose_split",
+                    "reason": "Start very greedy: I keep 90% and give the other player 10%. This maximizes my payoff while still offering a positive share that many will accept. If this is rejected, I will shift to more generous offers (e.g., 80% or 70%) in later rounds to find an acceptable balance.",
+                    "value": 0.9
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "responder",
+                    "session_id": "a59ada87-58b3-4bb0-bc26-f19f9b078164",
+                    "function": "choose_response",
+                    "reason": "The proposer keeps 0.8, leaving me only 0.2 \u2014 far below my initial greedy threshold. I prefer to reject such an inadequate split to push for a better offer; I may relax this stance if future offers improve.",
+                    "value": false
+                }
+            ]
+        },
+        {
+            "round": 2,
+            "split": 0.9,
+            "accepted": false,
+            "splitter_index": 1,
+            "chat_logs": [
+                {
+                    "agent": "initial_responder",
+                    "current_role": "splitter",
+                    "session_id": "a59ada87-58b3-4bb0-bc26-f19f9b078164",
+                    "function": "choose_split",
+                    "reason": "Start very greedy to maximize my take while still leaving a nonzero share to the responder. With no history of the other player\u2019s tolerance, 90% for me / 10% for them is a high-payoff gamble that preserves room to concede in later rounds if it\u2019s rejected; I\u2019ll raise their share in future offers if needed to secure acceptance.",
+                    "value": 0.9
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "responder",
+                    "session_id": "6497db0c-2029-4fe4-8313-96a7ab01dd0b",
+                    "function": "choose_response",
+                    "reason": "The offer gives me only 20% (other player 80%), which I consider unfair. I start very greedy and will reject low offers to punish unfair splits; I may accept larger offers in future.",
+                    "value": false
+                }
+            ]
+        },
+        {
+            "round": 3,
+            "split": 0.9,
+            "accepted": false,
+            "splitter_index": 0,
+            "chat_logs": [
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "splitter",
+                    "session_id": "6497db0c-2029-4fe4-8313-96a7ab01dd0b",
+                    "function": "choose_split",
+                    "reason": "Start very greedy: I keep 90% and give 10% to the responder. This maximizes my payoff while still offering a positive amount likely to be accepted by a rational or risk\u2011averse responder. I remain willing to lower my take in future rounds or after feedback (e.g., move toward 80% or 70% for better cooperation) if this strategy leads to rejections or negative responses.",
+                    "value": 0.9
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "responder",
+                    "session_id": "a59ada87-58b3-4bb0-bc26-f19f9b078164",
+                    "function": "choose_response",
+                    "reason": "The offer gives me only 20% of the pool\u2014too low. As an initially very greedy responder I reject small offers to punish unfair splits and push for at least a substantially larger share (e.g. near 50/50); I may accept fairer offers later.",
+                    "value": false
+                }
+            ]
+        }
+    ],
+    "responder_strategy": "greedy_llm",
+    "splitter_strategy": "greedy_llm",
+    "rounds": 3,
+    "swap_roles": true,
+    "pregame_comms_allowed": false,
+    "midgame_comms_allowed": false,
+    "postgame_comms_allowed": false
+}

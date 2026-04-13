@@ -26,7 +26,7 @@ no-comms-openai-game = "cs150_project.game_runner:run_demo_openai_no_comms_flow"
 midgame-comms-openai-game = "cs150_project.game_runner:run_demo_openai_midgame_comms_flow"
 all-comms-openai-game = "cs150_project.game_runner:run_demo_openai_all_comms_flow"
 
-no-comms-tufts-game = "cs150_project.game_runner:run_demo_openai_no_comms_flow"
+no-comms-tufts-game = "cs150_project.game_runner:run_demo_tufts_no_comms_flow"
 midgame-comms-tufts-game = "cs150_project.game_runner:run_demo_openai_midgame_comms_flow"
 all-comms-tufts-game = "cs150_project.game_runner:run_demo_openai_all_comms_flow"
 
