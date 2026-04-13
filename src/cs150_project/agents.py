@@ -354,7 +354,7 @@ class TuftsLLMProxyAgent(BaseUltimatumAgent):
 
         response = self.client.generate(
             model=self.model,
-            query=self.turn_prompt,
+            query=message,
             output_schema=ChatterResponse,
             session_id=self.session_id,
             system=self.system_prompt,
@@ -388,7 +388,7 @@ class TuftsLLMProxyAgent(BaseUltimatumAgent):
         ## todo, verify w/ status code that this goes through?
         self.client.generate(
             model=self.model,
-            query=self.turn_prompt,
+            query=message,
             session_id=self.session_id,
             system=self.system_prompt,
         )
