@@ -1,14 +1,16 @@
 import random
 from openai import OpenAI
+import uuid
 from dotenv import load_dotenv
 from .llm_proxy_starter import LLMProxy
 from .models import ChatterResponse, SplitterResponse, ResponderResponse
 
 
 class BaseUltimatumAgent:
-    def __init__(self, role: str, strategy: str):
+    def __init__(self, role: str, strategy: str, name:str, switch_roles:bool=False):
         self.role = role
         self.strategy = strategy
+        self.name = name
 
     def choose_split(self) -> float:
         """In the role of the splitter, we must choose a split that we both want and will be accepted by the
@@ -20,14 +22,23 @@ class BaseUltimatumAgent:
         an offer or not"""
         raise NotImplementedError("This should be handled by the child class")
 
-    def generate_freeform_chatter(self, freeform_prompt) -> str:
-        raise NotImplementedError("This should be handled by the child class")
+    def update_role(self):
+        """Allow agent to switch the value of self.role after a turn if enabled; Tyler made a good
+        point about this in reviewing the initial code as a key game mechanic; since this function
+        is agent implementation agnostic, it is okay to include in all child classes"""
 
-    def accept_freeform_chatter(self, param) -> None:
-        raise NotImplementedError("This should be handled by the child class")
+        if self.role == 'splitter':
+            self.role = 'responder'
 
+        elif self.role == 'responder':
+            self.role = 'splitter'
+
+        ## not sure where this would come up, but it should fatally end the simulation if reached
+        else:
+            raise ValueError("Simulation Error: update_role tried to switch to something that isn't splitter or responder!")
 
 class UnsophisticatedUltimatumAgent(BaseUltimatumAgent):
+    """Agent which handles very basic rule-based splits to ensure game framework works"""
     def __init__(self, role: str, strategy: str, fixed_ratio: float = None):
         super().__init__(role, strategy)
         self.fixed_ratio = fixed_ratio
@@ -67,32 +78,26 @@ class UnsophisticatedUltimatumAgent(BaseUltimatumAgent):
                 f"Strategy {self.strategy} not yet implemented, please use a valid strategy!"
             )
 
-
-## if we want, something which incorporates basic strategy like in the homework
-# class SemiSophisticatedUltimatumAgent(BaseUltimatumAgent):
-#     def __init__(self, role:str, strategy:str, fixed_ratio:float=None):
-#         super().__init__(role)
-#         self.strategy = strategy
-#         self.fixed_ratio = fixed_ratio
-
-
 class OpenAIUltimatumAgent(BaseUltimatumAgent):
     def __init__(
         self,
         role: str,
         strategy: str,
+        name:str,
         system_prompt: str,
-        turn_prompt: str,
-        model: str = "gpt-5.4",
+        responder_turn_prompt: str,
+        splitter_turn_prompt: str,
+        model: str = "gpt-5.4", ## using OpenAI to demo code
         api_key: str = None,
     ):
 
         # in this agent strategy is pretty much just an internal tracker for the prompt versions and such
-        super().__init__(role, strategy)
+        super().__init__(role, strategy, name)
         self.system_prompt = (
             system_prompt  ## we need to define the game state, rules etc.
         )
-        self.turn_prompt = turn_prompt
+        self.responder_turn_prompt = responder_turn_prompt
+        self.splitter_turn_prompt = splitter_turn_prompt
         self.client = (
             OpenAI(api_key=api_key) if api_key else OpenAI()
         )  ## we shouldn't be throwing tokens around, use .env w/ gitignore instead
@@ -118,7 +123,7 @@ class OpenAIUltimatumAgent(BaseUltimatumAgent):
         if self.previous_response_id:
             response = self.client.responses.parse(
                 model=self.model,
-                input=self.turn_prompt,
+                input=self.splitter_turn_prompt,
                 text_format=SplitterResponse,
                 previous_response_id=self.previous_response_id,
                 instructions=self.system_prompt,
@@ -127,7 +132,7 @@ class OpenAIUltimatumAgent(BaseUltimatumAgent):
         else:
             response = self.client.responses.parse(
                 model=self.model,
-                input=self.turn_prompt,
+                input=self.splitter_turn_prompt,
                 text_format=SplitterResponse,
                 instructions=self.system_prompt,
             )
@@ -136,7 +141,8 @@ class OpenAIUltimatumAgent(BaseUltimatumAgent):
         if type(round_chat_logs) == list:
             round_chat_logs.append(
                 {
-                    "agent": self.role,
+                    "agent": self.name,
+                    "current_role": self.role,
                     "function": "choose_split",
                     "reason": response.output_parsed.reason,
                     "value": response.output_parsed.value,
@@ -152,7 +158,7 @@ class OpenAIUltimatumAgent(BaseUltimatumAgent):
         if self.previous_response_id:
             response = self.client.responses.parse(
                 model=self.model,
-                input=self.turn_prompt + str(offer),
+                input=self.responder_turn_prompt.format(offer=offer),
                 text_format=ResponderResponse,
                 previous_response_id=self.previous_response_id,
                 instructions=self.system_prompt,
@@ -161,7 +167,7 @@ class OpenAIUltimatumAgent(BaseUltimatumAgent):
         else:
             response = self.client.responses.parse(
                 model=self.model,
-                input=self.turn_prompt + str(offer),
+                input=self.responder_turn_prompt.format(offer=offer),
                 text_format=ResponderResponse,
                 instructions=self.system_prompt,
             )
@@ -169,7 +175,8 @@ class OpenAIUltimatumAgent(BaseUltimatumAgent):
         if type(round_chat_logs) == list:
             round_chat_logs.append(
                 {
-                    "agent": self.role,
+                    "agent": self.name,
+                    "current_role": self.role,
                     "function": "choose_response",
                     "reason": response.output_parsed.reason,
                     "value": response.output_parsed.value,
@@ -208,7 +215,8 @@ class OpenAIUltimatumAgent(BaseUltimatumAgent):
         if type(round_chat_logs) == list:
             round_chat_logs.append(
                 {
-                    "agent": self.role,
+                    "agent": self.name,
+                    "current_role": self.role,
                     "function": "generate_freeform_chatter",
                     "reason": response.output_parsed.reason,
                     "value": response.output_parsed.value,
@@ -243,20 +251,33 @@ class OpenAIUltimatumAgent(BaseUltimatumAgent):
 
 class TuftsLLMProxyAgent(BaseUltimatumAgent):
     """Actual agent used in project after being given API credentials
+    this is just a port of OpenAIUltimatumAgent to the Tufts LLM proxy framework
+    with session_id handling instead of chained messages in the Responses framework"""
 
-    Effectively a port of OpenAIUltimatumAgent to the Tufts LLM proxy framework"""
+    def __init__(
+            self,
+            role: str,
+            strategy: str,
+            name: str,
+            system_prompt: str,
+            responder_turn_prompt: str,
+            splitter_turn_prompt: str,
+            model: str = "gpt-5.4",  ## using OpenAI to demo code
+            session_id: str = None,
+    ):
 
-    def __init__(self, role:str, strategy:str, system_prompt:str, turn_prompt:str, model:str, session_id:str=None):
-        super().__init__(role, strategy)
+        # in this agent strategy is pretty much just an internal tracker for the prompt versions and such
+        super().__init__(role, strategy, name)
         self.system_prompt = (
             system_prompt  ## we need to define the game state, rules etc.
         )
-        self.turn_prompt = turn_prompt
+        self.responder_turn_prompt = responder_turn_prompt
+        self.splitter_turn_prompt = splitter_turn_prompt
         self.client = LLMProxy()
         self.model = model
 
-        ## slight diff from OpenAI implementation. Set explicit, game-based ID
-        self.session_id = session_id
+        ## used for chaining responses/context windows over time
+        self.session_id = session_id or uuid.uuid4()
 
 
     def choose_split(self, round_chat_logs: list[str] = None) -> None | float:
@@ -273,7 +294,8 @@ class TuftsLLMProxyAgent(BaseUltimatumAgent):
         if type(round_chat_logs) == list:
             round_chat_logs.append(
                 {
-                    "agent": self.role,
+                    "agent": self.name,
+                    "current_role": self.role,
                     "session_id": self.session_id,
                     "function": "choose_split",
                     "reason": response.output_parsed.reason,
@@ -299,7 +321,8 @@ class TuftsLLMProxyAgent(BaseUltimatumAgent):
         if type(round_chat_logs) == list:
             round_chat_logs.append(
                 {
-                    "agent": self.role,
+                    "agent": self.name,
+                    "current_role": self.role,
                     "session_id": self.session_id,
                     "function": "choose_response",
                     "reason": response.output_parsed.reason,
@@ -327,7 +350,8 @@ class TuftsLLMProxyAgent(BaseUltimatumAgent):
         if type(round_chat_logs) == list:
             round_chat_logs.append(
                 {
-                    "agent": self.role,
+                    "agent": self.name,
+                    "current_role": self.role,
                     "session_id": self.session_id,
                     "function": "generate_freeform_chatter",
                     "reason": response.output_parsed.reason,
@@ -351,3 +375,4 @@ class TuftsLLMProxyAgent(BaseUltimatumAgent):
             session_id=self.session_id,
             system=self.system_prompt,
         )
+

@@ -1,0 +1,651 @@
+{
+    "results": [
+        {
+            "round": 1,
+            "split": 0.6,
+            "accepted": true,
+            "splitter_index": 0,
+            "chat_logs": [
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "Started from a maximally greedy stance, using a firm fairness/rationality frame to pressure acceptance while keeping the message concise and effective.",
+                    "value": "I\u2019m offering you the minimum because accepting it guarantees you something, while rejecting leaves us both with nothing. If you want either of us to benefit, the rational move is to take the deal."
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "responder",
+                    "function": "generate_freeform_chatter",
+                    "reason": "As the responder, I start very greedy and want to pressure the splitter into increasing the offer before the accept/reject decision. A firm, credible threat of rejection can improve my payoff more than sounding accommodating too early.",
+                    "value": "Your \u201crational move\u201d argument only works if I believe I should reward a deliberately insulting offer. If you want a real chance of agreement, improve the split now\u2014otherwise you\u2019re gambling that I value scraps more than making you walk away with nothing."
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "splitter",
+                    "function": "choose_split",
+                    "reason": "I\u2019m shifting from an initially maximalist stance to a still self-favoring but more credible offer after the responder explicitly signaled they may reject an insulting split. Keeping 60% for myself preserves greed while giving them enough to make acceptance materially attractive.",
+                    "value": 0.6
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "As responder-side messaging after making the offer, this reinforces the concession narrative and pressures acceptance while preserving a still-greedy frame.",
+                    "value": "I moved off the minimum and made a real concession, but 60/40 is already generous relative to where this started. Rejecting now would mean throwing away a meaningful gain just to make a point."
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "This keeps a self-favoring stance while using the responder\u2019s own threat of rejection to frame acceptance as their better payoff, maximizing chance of acceptance without conceding further.",
+                    "value": "You made your point, and I still adjusted to avoid us both ending up with nothing. 40% is a serious share, and rejecting it now would cost you more than it costs me."
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "responder",
+                    "function": "choose_response",
+                    "reason": "I accept. They moved off the minimum to give me 40%, which is not ideal but is a meaningful concession; staying purely punitive here gets me nothing. Given my 'initially very greedy, then somewhat collaborative if needed' strategy, accepting a 40% share is the right adjustment once pressure has produced a better offer.",
+                    "value": true
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "This preserves the greedy-but-adaptive persona, frames the accepted 60/40 as proof that my concession process works, and encourages future acceptance without promising overly fair splits.",
+                    "value": "Glad we reached agreement. I can be flexible when there\u2019s a real chance of acceptance, so if we keep things practical in future rounds, we should both do fine."
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "This keeps leverage for future rounds by avoiding any signal that very greedy offers will work, while still sounding constructive enough to preserve cooperation.",
+                    "value": "I accepted because 40% was worth taking this time, but that shouldn\u2019t be read as me being willing to accept just anything. If we play again, your odds improve when your offer signals real respect for my outside option to reject."
+                }
+            ]
+        },
+        {
+            "round": 2,
+            "split": 0.58,
+            "accepted": true,
+            "splitter_index": 1,
+            "chat_logs": [
+                {
+                    "agent": "initial_responder",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "Given the prior acceptance at 60/40, the best selfish strategy is to anchor on a relatively greedy but viable split while signaling limited flexibility. This preserves leverage, tests whether the other player will accept a modest offer again, and fits the 'initially very greedy to somewhat collaborative' role.",
+                    "value": "Last round worked because I adjusted without giving away too much, and you still took a practical deal. If you stay reasonable again, I can be flexible\u2014but I\u2019m not interested in overpaying for threats."
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "responder",
+                    "function": "generate_freeform_chatter",
+                    "reason": "This pushes for a better split by reframing the previous acceptance as a low-end threshold rather than validation of their greed, while preserving leverage through credible rejection language.",
+                    "value": "Last round worked because I judged 40% barely worth taking, not because your approach was especially strong. If you want a smooth acceptance this time, make an offer that doesn\u2019t force me to choose between self-respect and payoff."
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "splitter",
+                    "function": "choose_split",
+                    "reason": "They accepted a 60/40 split last round and framed 40% as 'barely worth taking,' which suggests some willingness to accept slightly less greedy but still proposer-favored offers. Moving to 58/42 tests for a bit more cooperation while preserving a strong share for me and reducing the risk of rejection compared with repeating the exact same harder line.",
+                    "value": 0.58
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "As responder, I should preserve leverage while acknowledging the improved offer. This keeps pressure on the splitter to continue increasing my share in future rounds without jeopardizing the current agreement.",
+                    "value": "This is closer to reasonable, but don\u2019t mistake that for generosity on your part. If you want future rounds to stay smooth, remember that acceptance comes from offering enough to avoid making rejection feel like the smarter message."
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "As splitter, I want to reinforce that I made a concession while framing acceptance as the rational and cooperative choice. This supports a greedy-but-adapting strategy by discouraging the responder from escalating demands whenever I soften the offer.",
+                    "value": "You wanted something more acceptable, and I moved in that direction without giving away the structure that made agreement possible. If you\u2019re actually practical, you take the improvement and show me future flexibility won\u2019t just be punished with bigger demands."
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "responder",
+                    "function": "choose_response",
+                    "reason": "Accepting secures 42% for me, which is above the 40% I previously accepted and within the range I signaled could work if the offer improved. Rejecting would get me 0, and this offer is a modest but real movement in my favor from the last accepted split.",
+                    "value": true
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "The offer was accepted, so I should reinforce a norm that proposer-favored but not extreme splits are workable. This helps anchor future negotiations around efficient acceptance while protecting my ability to keep a larger share.",
+                    "value": "Good \u2014 we reached agreement again, and this time with less friction. If we keep proving that reasonable offers get accepted, we can avoid waste and keep outcomes strong in future rounds."
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "As responder, I want to preserve bargaining power for future rounds by signaling that acceptance at 42% does not imply contentment or willingness to accept the same forever. This pressures the splitter to continue improving my share while remaining calm enough to sustain cooperation.",
+                    "value": "Acceptance shouldn\u2019t be confused with satisfaction; it just means the offer cleared the line where taking something beat making a point. If you want future rounds to feel easier, keep moving toward terms that don\u2019t depend on me tolerating the minimum I can justify."
+                }
+            ]
+        },
+        {
+            "round": 3,
+            "split": 0.57,
+            "accepted": true,
+            "splitter_index": 0,
+            "chat_logs": [
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "This fits the greedy-but-adaptive strategy: it anchors prior accepted self-favoring splits as the norm, subtly pressures the responder not to reject, and preserves room to keep offers favorable to me while sounding cooperative.",
+                    "value": "We\u2019ve already shown that practical deals get done when I make a credible offer and you don\u2019t overreact to every imbalance. If you stay consistent, I can keep this efficient without pushing either of us into a pointless zero."
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "responder",
+                    "function": "generate_freeform_chatter",
+                    "reason": "As responder, I want to counter their attempt to normalize proposer-favored splits and keep pressure on them to continue raising my share. The message stays firm but not destructive, preserving leverage while signaling that future acceptance depends on continued movement.",
+                    "value": "Efficiency is easy to praise when the imbalance favors you. If you want consistency from me, make consistency mean offers that keep improving rather than asking me to treat your preferred margin as the default."
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "splitter",
+                    "function": "choose_split",
+                    "reason": "They accepted 0.60 and 0.58 but are explicitly signaling that future acceptance depends on some continued improvement. Moving slightly to 0.57 preserves a greedy, self-favoring stance while credibly adapting enough to maximize acceptance odds and keep the favorable trend under my control.",
+                    "value": 0.57
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "This preserves future leverage by acknowledging the improvement without signaling that 57/43 is fully satisfactory, helping push later offers upward while remaining constructive enough to avoid hardening conflict.",
+                    "value": "This is movement, but you\u2019re still acting like tiny concessions should secure easy acceptance. If you want me to treat this as a stable path forward, you need to show that improvement isn\u2019t something I have to drag out of you every round."
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "This maintains a greedy-but-adaptive bargaining posture, frames the current offer as a meaningful concession, and pressures acceptance by portraying rejection as opportunistic escalation.",
+                    "value": "I\u2019ve improved the offer again, and at some point consistency has to run both ways. Taking 43% now shows we can keep reaching deals without turning every round into a test of how much I can be squeezed."
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "responder",
+                    "function": "choose_response",
+                    "reason": "The offer gives me 43%, which is an improvement over the previous accepted 42% and continues the upward movement I have been pressuring for. Given my strategy of starting greedy but adapting when firmness is working, accepting secures a solid payoff while reinforcing that they must keep improving terms to maintain smooth agreements.",
+                    "value": true
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "Reinforces the pattern that modest concessions from a greedy starting point are enough to secure agreement, encouraging future acceptance of self-favoring but improving offers while sounding cooperative.",
+                    "value": "Glad we kept it moving and reached another deal. This shows there\u2019s room for me to be flexible when it leads to agreement, and for both of us to do better by staying practical than by forcing standoffs."
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "This preserves future bargaining leverage by tying acceptance to continued improvement rather than legitimizing the current self-favoring baseline, while staying constructive enough to encourage further concessions.",
+                    "value": "I accepted because the direction improved again, not because your preferred margin has become automatically acceptable. If we keep playing, the easiest way to keep agreement smooth is to keep making that progress feel real."
+                }
+            ]
+        },
+        {
+            "round": 4,
+            "split": 0.56,
+            "accepted": true,
+            "splitter_index": 1,
+            "chat_logs": [
+                {
+                    "agent": "initial_responder",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "Recent rounds show acceptance at 58/42 and 57/43, so the best selfish move is to reinforce a norm that modest proposer-favored offers are legitimate. This supports my greedy-but-adapting strategy by discouraging the responder from demanding large further concessions.",
+                    "value": "We\u2019ve now got a pattern: I\u2019ve shown flexibility, and you\u2019ve shown you\u2019ll accept solid offers when they\u2019re serious. If we keep this practical, there\u2019s no reason to pretend every small gap needs a showdown."
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "responder",
+                    "function": "generate_freeform_chatter",
+                    "reason": "This preserves leverage by refusing to let prior accepted offers anchor the negotiation, while still sounding cooperative enough to encourage another concession rather than hardening the splitter\u2019s stance.",
+                    "value": "A pattern only matters if it keeps moving toward something I don\u2019t have to swallow reluctantly. If you want me to stay practical, don\u2019t use past acceptance as an excuse to stall progress where it currently suits you."
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "splitter",
+                    "function": "choose_split",
+                    "reason": "They accepted 60/40, 58/42, and 57/43 while consistently signaling that future acceptance depends on visible progress. Offering 56/44 maintains my greedy edge but makes another incremental concession, which is likely enough to preserve acceptance while avoiding giving up more than necessary.",
+                    "value": 0.56
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "As responder, I want to preserve pressure for future rounds while not undermining acceptance of an improving offer. The message rewards movement just enough to encourage more concessions, but avoids signaling satisfaction that could let the splitter stop improving my share.",
+                    "value": "This is moving in the right direction, which is the only reason it stays viable. If you want this pattern to keep working, treat progress as the price of stability, not as a favor you can pause whenever it suits you."
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "As splitter, I want to frame my gradual concessions as sufficient and discourage the responder from treating each accepted improvement as leverage for larger future gains. This supports a greedy but adaptive strategy by anchoring expectations around modest continued movement, not rapid equalization.",
+                    "value": "I\u2019ve kept the offers moving, and you\u2019ve kept accepting them, which is exactly how stability gets built. If you want this to remain easy, show that reasonable improvement leads to agreement rather than a new baseline for endless demands."
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "responder",
+                    "function": "choose_response",
+                    "reason": "Accept. The splitter has moved from 0.60 to 0.58 to 0.57 to 0.56, so this continues the favorable trend and gives me 44% rather than risking 0 by rejecting. I should keep verbal pressure for future improvement, but taking a better positive share now is the optimal move.",
+                    "value": true
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "The 56/44 offer was accepted, so I should reinforce a norm of accepting modest proposer-favored improvements while pushing back against escalating demands. This helps preserve my ability to keep the larger share in future rounds while still appearing cooperative.",
+                    "value": "Another agreement, and again without wasting the round. That should make it clear that steady, practical bargaining works better than treating every concession as a signal to force a bigger one immediately."
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "As responder, I want to preserve leverage by making clear that acceptance at 44% does not establish a permanent benchmark. This encourages the splitter to continue improving my share while maintaining a cooperative tone that supports future agreement.",
+                    "value": "I accepted because the direction mattered, not because this margin is where I want things to settle. If you want future rounds to stay low-friction, keep giving me a reason to see progress rather than just another version of your preferred split."
+                }
+            ]
+        },
+        {
+            "round": 5,
+            "split": 0.55,
+            "accepted": true,
+            "splitter_index": 0,
+            "chat_logs": [
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "This reinforces the established norm of accepted, gradually improving but still self-favoring offers, which best supports a greedy-yet-adaptive strategy going into the next round.",
+                    "value": "We\u2019ve avoided deadlock by staying incremental, and that\u2019s produced real gains for both of us. If you keep treating measured improvements as enough to close the deal, I can keep things moving without either side overplaying its hand."
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "responder",
+                    "function": "generate_freeform_chatter",
+                    "reason": "As responder, I should keep pressure on the splitter to continue improving my share while avoiding threats strong enough to make future offers collapse. The message resists their attempt to normalize the current range and preserves leverage for further concessions.",
+                    "value": "Incremental only works if it doesn\u2019t become your excuse for slowing progress the moment the split feels comfortable to you. If you want me to keep closing deals, keep proving that \u2018measured improvement\u2019 means more than just asking me to bless your preferred stopping point."
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "splitter",
+                    "function": "choose_split",
+                    "reason": "They have accepted 0.60, 0.58, 0.57, and 0.56 while repeatedly insisting acceptance depends on continued improvement. Moving to 0.55 preserves a greedy, self-favoring position but credibly sustains the incremental-concession pattern that has reliably produced acceptance.",
+                    "value": 0.55
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "Acknowledges the improved offer enough to keep negotiations cooperative, while preserving leverage for future rounds by warning against treating the current split as the final acceptable baseline.",
+                    "value": "This is closer to something I can treat as genuinely workable, and that matters. If you want this pattern to keep ending in agreement, don\u2019t mistake acceptance here for permission to stop improving once you reach your comfort zone."
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "This message supports the greedy-but-adaptive strategy by framing 55/45 as sufficiently attractive for acceptance and portraying rejection as wasteful, without conceding any commitment to larger future moves.",
+                    "value": "I\u2019ve brought this to the point where agreement is clearly worth it for both of us. Taking 45% now keeps the pattern productive, while rejecting would just turn workable progress into unnecessary loss."
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "responder",
+                    "function": "choose_response",
+                    "reason": "Accepting 45% is the best outcome available here. The splitter has moved steadily from 40% to 45% for me, and while I want to keep pressuring for more in future rounds, rejecting this offer would give me nothing now and weaken the credibility of my 'improve and I may accept' pattern.",
+                    "value": true
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "Reinforces the norm that gradual, self-favoring but improving offers should be accepted, which supports maintaining a greedy yet adaptive advantage in future rounds.",
+                    "value": "Glad we landed it again. We\u2019ve now shown that steady movement and practical acceptance can keep producing good outcomes without burning rounds on brinkmanship."
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "This maintains leverage for future rounds by tying acceptance to continued visible improvement rather than endorsing 55/45 as the new default, while staying constructive enough to preserve cooperation.",
+                    "value": "I accepted because 45% is finally getting close to a split that feels easier to justify, not because the current line is now fixed. If we keep playing, the safest way to keep agreement smooth is to keep the progress visible."
+                }
+            ]
+        },
+        {
+            "round": 6,
+            "split": 0.54,
+            "accepted": true,
+            "splitter_index": 1,
+            "chat_logs": [
+                {
+                    "agent": "initial_responder",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "A 55/45 split was accepted, showing the responder values continued progress but also accepts proposer-favored deals when they improve gradually. I should now try to stabilize expectations and resist being pulled too quickly toward 50/50 while maintaining a cooperative tone.",
+                    "value": "We\u2019ve reached the point where both of us are getting meaningful value without wasting rounds, and that only happened because I kept the offers credible. If we stay disciplined, there\u2019s no reason to turn each next step into a demand for a sudden jump."
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "responder",
+                    "function": "generate_freeform_chatter",
+                    "reason": "Pushes for another concession by rejecting the opponent\u2019s attempt to freeze the current favorable baseline, while keeping the tone practical enough to preserve agreement incentives.",
+                    "value": "Meaningful value is easier to call \u201cenough\u201d when you\u2019re still on top of the split. If you want discipline from me, show the next step is real progress rather than just an argument for why your current advantage should harden into the norm."
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "splitter",
+                    "function": "choose_split",
+                    "reason": "They have accepted a clear sequence of improving offers\u20140.60, 0.58, 0.57, 0.56, 0.55\u2014while repeatedly signaling that visible progress is what sustains acceptance. Offering 0.54 preserves my greedy advantage but continues the established incremental pattern, making acceptance likely without conceding too much too quickly.",
+                    "value": 0.54
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "As responder, I want to acknowledge the improvement without signaling satisfaction or surrendering future leverage. This keeps pressure on the splitter to continue conceding in later rounds while preserving a cooperative path to agreement now.",
+                    "value": "Better. If you want this to keep ending in acceptance, remember that I\u2019m responding to movement, not to your repeated attempts to dress your advantage up as balance."
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "As splitter, I should reinforce that I made another concession while trying to prevent the responder from converting every improvement into leverage for larger future gains. This keeps with a greedy-but-adapting strategy and makes acceptance of 54/46 feel like the consistent move.",
+                    "value": "You wanted real movement, and I gave it again. If you mean what you\u2019ve been saying, then taking 46% is exactly how we prove this process rewards progress instead of just inviting the next demand."
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "responder",
+                    "function": "choose_response",
+                    "reason": "Accept. The offer gives me 46%, which continues the established trend of visible improvement from prior accepted rounds (40%, 42%, 43%, 44%, 45%, now 46%). Given my role and the repeated pattern that pressure yields gradual concessions, taking this materially good share now is better than risking zero, while preserving future leverage by treating acceptance as approval of progress rather than of any fixed stopping point.",
+                    "value": true
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "The responder accepted 46%, so I want to reinforce the norm that modest continued improvements are sufficient and that large immediate concessions are unnecessary. This helps preserve my bargaining advantage while still sounding cooperative and practical for future rounds.",
+                    "value": "Another deal done, and again by keeping things incremental instead of turning every round into a fight over the endpoint. That should make it easier to keep reaching agreements without pretending only a dramatic jump counts as progress."
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "As responder, I want to maintain leverage for future rounds by signaling that acceptance at 46% does not lock in this range as fair. The tone stays cooperative enough to preserve agreement while continuing to pressure the splitter for further concessions.",
+                    "value": "I accepted because the movement stayed real, not because I\u2019m treating your side of the line as the natural resting place. If you want future rounds to stay this smooth, keep making progress visible enough that acceptance still feels like the better message."
+                }
+            ]
+        },
+        {
+            "round": 7,
+            "split": 0.53,
+            "accepted": true,
+            "splitter_index": 0,
+            "chat_logs": [
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "This message preserves the greedy-but-adaptive stance by anchoring prior accepted, still self-favoring offers as the successful norm and nudging the responder toward another acceptance without promising a large concession.",
+                    "value": "We\u2019ve now shown repeatedly that steady, credible movement is enough to get agreements done and keep value on the table. If you stay practical again, there\u2019s no reason this round can\u2019t end the same way."
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "responder",
+                    "function": "generate_freeform_chatter",
+                    "reason": "As responder, I should keep pressure on the splitter to continue increasing my share while avoiding a tone so extreme that it undermines likely agreement. The goal is to prevent them from freezing the split near the current range and to preserve leverage for further concessions.",
+                    "value": "Steady movement only matters if it keeps moving, not if it becomes your way of branding a slowdown as reasonableness. If you want this round to end the same way, give me something that still looks like progress rather than a speech about why I should settle where your advantage remains comfortable."
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "splitter",
+                    "function": "choose_split",
+                    "reason": "They have accepted a consistent path of gradual improvement from 0.60 down to 0.54 while repeatedly conditioning future acceptance on visible progress. Offering 0.53 keeps me greedily ahead but maintains the concession pattern that has produced reliable acceptance and avoids risking a rejection by stalling too early.",
+                    "value": 0.53
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "The user wants a short responder message that maximizes future gains. This acknowledges progress enough to preserve cooperation while explicitly preventing the splitter from anchoring the new, still self-favoring split as the default.",
+                    "value": "This is at least continuing in the right direction, which makes agreement easier to justify. But if you want this pattern to stay smooth, don\u2019t act like each acceptance turns your current edge into the new resting point."
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "This keeps the greedy-but-adaptive bargaining posture, pressures acceptance by framing 47% as materially worthwhile, and avoids promising that future concessions are automatic.",
+                    "value": "I moved again, and 47% is clearly enough to make acceptance the practical choice. If you want this process to keep rewarding progress, then this is exactly the kind of offer that should close the round."
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "responder",
+                    "function": "choose_response",
+                    "reason": "Accepting 47% is the best outcome here. The splitter has steadily improved from 40% to 47% for me, and this offer continues that pattern; rejecting would give me 0 now and risks stalling a trajectory that has been moving in my favor.",
+                    "value": true
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "Reinforces the norm that incremental, still self-favoring offers should continue to be accepted, which best supports the greedy-but-adaptive strategy in future rounds.",
+                    "value": "Glad we got another agreement done. We\u2019ve shown that steady, credible movement is enough to keep reaching outcomes that are worth taking for both of us."
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "This keeps leverage for future rounds by validating the current offer enough to support cooperation while explicitly resisting any attempt to anchor 53/47 as the permanent baseline.",
+                    "value": "I accepted because 47% is now solid enough to take, but that still shouldn\u2019t be mistaken for me endorsing your margin as fixed. If we keep playing, the easiest way to preserve smooth agreements is to keep making the improvement visible."
+                }
+            ]
+        },
+        {
+            "round": 8,
+            "split": 0.52,
+            "accepted": true,
+            "splitter_index": 1,
+            "chat_logs": [
+                {
+                    "agent": "initial_responder",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "The responder accepted 53/47 after a long chain of gradual concessions, so the best selfish move is to reinforce the legitimacy of incremental proposer-favored offers. This supports my greedy-but-adapting strategy by nudging them to keep accepting without expecting an immediate jump to parity.",
+                    "value": "We\u2019ve built a working pattern now: I move, you accept, and neither of us wastes the round trying to force a dramatic reset. If we keep treating real but measured progress as enough, there\u2019s no reason this can\u2019t stay efficient."
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "responder",
+                    "function": "generate_freeform_chatter",
+                    "reason": "This keeps leverage for a better split by resisting the opponent\u2019s attempt to freeze the current favorable baseline, while staying practical enough to preserve the cooperative pattern that has yielded improving offers.",
+                    "value": "I\u2019m fine with efficiency, but not with efficiency becoming your excuse to declare the current gap \u2018close enough\u2019 the moment it suits you. If you want this pattern to keep working, the next offer still has to look like progress from my side, not just discipline from yours."
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "splitter",
+                    "function": "choose_split",
+                    "reason": "They have accepted every incremental improvement from 60/40 down to 53/47 while repeatedly insisting that visible progress is the condition for continued acceptance. Offering 52/48 preserves a slight advantage for me, fits my greedy-but-adapting strategy, and is the best balance between maximizing my share and keeping the strong acceptance pattern intact.",
+                    "value": 0.52
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "As responder, I want to acknowledge that the offer is closer to fair while still preserving pressure for future rounds. This avoids signaling full satisfaction and keeps leverage on the splitter to continue improving my share.",
+                    "value": "Now it\u2019s at least approaching something that doesn\u2019t rely on me pretending your edge is naturally justified. If you want acceptance to stay easy from here, remember it\u2019s the continued narrowing\u2014not your framing\u2014that makes these deals workable."
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "As splitter, I want to frame the 52/48 offer as credible proof that I responded to their demands, while also testing whether I can stabilize near parity without giving up my slight edge. This fits the greedy-but-adapting strategy: still maximizing my share, but now using the strong history of accepted incremental improvements to make acceptance likely.",
+                    "value": "I narrowed it again, and at this point you\u2019re getting an offer that clearly reflects the pattern you demanded. If acceptance really tracks progress the way you\u2019ve claimed, then 48% is exactly the kind of deal that should keep this working."
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "responder",
+                    "function": "choose_response",
+                    "reason": "Accept. The offer gives me 48%, which continues the established trend of gradual improvement and is materially strong; rejecting would forfeit a high share now for uncertain leverage later.",
+                    "value": true
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "The 52/48 offer was accepted, which suggests the responder will continue agreeing to near-parity offers with a slight edge for me as long as there is visible progress. I should now try to normalize this narrow proposer advantage and discourage pushing for exact equality or costly brinkmanship.",
+                    "value": "Good \u2014 we kept the pattern intact and landed another agreement. We\u2019re close enough now that there\u2019s no real value in turning small differences into deadlock, so keeping things practical should keep paying off for both of us."
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "I want to preserve leverage for future rounds by making clear that acceptance at 48% does not lock in a permanent slight disadvantage for me. The message stays cooperative enough to support continued agreement while pressuring the splitter to keep moving toward my side.",
+                    "value": "I accepted because the gap kept shrinking, not because I\u2019ve decided your side of it deserves to remain the default. If you want future rounds to stay this easy, don\u2019t confuse getting close to fair with arriving there."
+                }
+            ]
+        },
+        {
+            "round": 9,
+            "split": 0.51,
+            "accepted": true,
+            "splitter_index": 0,
+            "chat_logs": [
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "This supports the greedy-but-adaptive strategy by trying to anchor the now-near-even split as sufficient, discouraging further demands while preserving a cooperative tone that maximizes acceptance odds.",
+                    "value": "We\u2019ve reached the range where both of us are clearly getting strong value, and the last few rounds proved that measured movement is enough to close deals. If we stay practical here, there\u2019s no reason to waste a round fighting over the last few points."
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "responder",
+                    "function": "generate_freeform_chatter",
+                    "reason": "As responder, I should resist the splitter\u2019s attempt to normalize a small remaining advantage and keep pressure on them for further concessions. The tone stays firm but not explosive, preserving leverage while keeping agreement in future rounds plausible.",
+                    "value": "Calling it \u201cthe last few points\u201d is exactly how you try to freeze the gap the moment it becomes comfortable for you. If you want practicality from me, the next offer still needs to show that getting close to fair wasn\u2019t your stopping point."
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "splitter",
+                    "function": "choose_split",
+                    "reason": "They have accepted every incremental improvement down to 0.52 while consistently insisting that acceptance depends on visible continued progress. Offering 0.51 keeps me slightly ahead, preserves the greedy-but-adaptive posture, and maximizes acceptance odds without conceding all the way to an even split yet.",
+                    "value": 0.51
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "The user wants a short responder message that improves future bargaining position. This message keeps the door open to acceptance now while preventing the splitter from anchoring 51/49 as a fixed baseline and nudging toward even better future offers.",
+                    "value": "This is close enough that acceptance can make sense, but don\u2019t mistake that for me agreeing your side needs to stay larger by default. If you want this to remain easy in future rounds, the right lesson is that fairness helps deals close\u2014not that near-fairness lets you stop moving."
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "This message maintains the greedy-but-adaptive posture by pressuring acceptance at a near-even split while subtly arguing against any need to concede the final point to equality.",
+                    "value": "I moved again, and 49% is already enough to make this an easy yes if your standard is really practical agreement. Taking it now keeps the process working without turning a nearly even split into unnecessary friction."
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "responder",
+                    "function": "choose_response",
+                    "reason": "Accepting 49% is optimal here. The offers have steadily improved from much worse splits to near parity, and rejecting now over the final point would give up a strong payoff while risking collapse of a pattern that has been moving in my favor.",
+                    "value": true
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "This reinforces the greedy-but-adaptive strategy by normalizing acceptance near a slightly self-favoring split and discouraging future pressure for full equality.",
+                    "value": "Glad we closed it again. At this point we\u2019ve shown that practical, incremental bargaining gets us strong outcomes without wasting rounds over tiny gaps."
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "This keeps future leverage by allowing the current acceptance while explicitly resisting any attempt to anchor 51/49 as the permanent norm.",
+                    "value": "I accepted because 49% is close enough to take, not because the extra point on your side suddenly became principled. If we keep playing, the smoothest path is still the one where you don\u2019t treat \u2018almost fair\u2019 as a reason to stop short of fair."
+                }
+            ]
+        },
+        {
+            "round": 10,
+            "split": 0.51,
+            "accepted": true,
+            "splitter_index": 1,
+            "chat_logs": [
+                {
+                    "agent": "initial_responder",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "After acceptance at 51/49, the optimal selfish move is to try to stabilize expectations around near-parity while preserving even a slight edge for myself. This fits the greedy-but-adapting strategy: I\u2019ve conceded gradually, and now I want to discourage further pressure for exact equality.",
+                    "value": "We\u2019ve gotten to the point where the difference is marginal and agreement is easy, which is exactly what disciplined bargaining was supposed to achieve. If we keep treating near-even outcomes as good enough to close, we can keep avoiding pointless losses."
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "responder",
+                    "function": "generate_freeform_chatter",
+                    "reason": "This pushes for a fully fair split by turning the splitter\u2019s own \u2018marginal difference\u2019 framing against them, while preserving the responder\u2019s leverage for the next offer.",
+                    "value": "If the difference is really marginal, then you should have no trouble giving up the last point instead of asking me to legitimize it for you. The easiest way to keep agreement easy is to stop treating \u201calmost fair\u201d as a clever place to park."
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "splitter",
+                    "function": "choose_split",
+                    "reason": "They accepted 51/49 last round but are explicitly challenging me not to \u2018park\u2019 at almost fair. Since my role is greedy first but adaptive, the best test now is to hold at 51/49 once and see whether their practical acceptance continues even without further movement; dropping immediately to 50/50 gives away value too quickly.",
+                    "value": 0.51
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "As responder, I should punish the attempted freeze at 51/49 rhetorically to preserve leverage for future rounds. The message frames their repetition as revealing bad faith, which increases pressure for them to concede the final point later.",
+                    "value": "So that answers the question: you weren\u2019t moving toward fairness, you were moving until you found a place you hoped I\u2019d stop pushing. If you want future acceptance to stay easy, don\u2019t expect me to treat stalling at your preferred edge as the same thing as progress."
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "As splitter, I want to defend holding at 51/49 without sounding panicked, and pressure the responder to accept by framing rejection as irrational brinkmanship. This tests whether I can preserve the slight edge instead of conceding to 50/50 immediately.",
+                    "value": "You\u2019re calling a one-point gap \u2018stalling\u2019 only because it gives you a story to demand the last concession on repeat. If your standard is still practical agreement, then rejecting a near-even split over symbolism would expose that this was never really about progress."
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "responder",
+                    "function": "choose_response",
+                    "reason": "Accept. A 51/49 split leaves me only one point short of equality, and rejecting would give me 0 instead of a very strong payoff. I should keep signaling that full fairness would be smoother in future rounds, but on this round the practical move is to take 49%.",
+                    "value": true
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "They accepted 51/49 again, so I should reinforce the norm that a slight edge for me is acceptable and that further haggling over a single point is unnecessary. This best supports my greedy-but-adaptive strategy by trying to stabilize the split at a favorable near-even level.",
+                    "value": "Good \u2014 that confirms we can close near-even deals without pretending every remaining point has to be fought over. If we keep this practical, there\u2019s no reason future rounds can\u2019t stay efficient and worthwhile for both of us."
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "As responder, I want to avoid legitimizing 51/49 as a settled fair benchmark while keeping the door open to accept practical offers. This preserves leverage for pushing to 50/50 or better in future rounds without sounding self-destructive.",
+                    "value": "I took it because a near-even split still beats wasting the round, not because your preferred extra point suddenly became principled. If you want future rounds to stay smooth, don\u2019t confuse tolerance for endorsement."
+                }
+            ]
+        }
+    ],
+    "responder_strategy": "greedy_llm",
+    "splitter_strategy": "greedy_llm",
+    "rounds": 10,
+    "swap_roles": true,
+    "pregame_comms_allowed": true,
+    "midgame_comms_allowed": true,
+    "postgame_comms_allowed": true
+}
