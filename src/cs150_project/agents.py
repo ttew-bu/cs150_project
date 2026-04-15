@@ -4,6 +4,7 @@ import uuid
 import json
 from .llm_proxy_starter import LLMProxy
 from .models import ChatterResponse, SplitterResponse, ResponderResponse
+from .constants import LASTK_PLACEHOLDER
 
 
 class BaseUltimatumAgent:
@@ -268,6 +269,7 @@ class TuftsLLMProxyAgent(BaseUltimatumAgent):
         responder_turn_prompt: str,
         splitter_turn_prompt: str,
         model: str = "gpt-5.4",  ## using OpenAI to demo code
+        lastk: int = LASTK_PLACEHOLDER,
         session_id: str = None,
     ):
 
@@ -280,6 +282,7 @@ class TuftsLLMProxyAgent(BaseUltimatumAgent):
         self.splitter_turn_prompt = splitter_turn_prompt
         self.client = LLMProxy()
         self.model = model
+        self.lastk = lastk
 
         ## used for chaining responses/context windows over time
         self.session_id = session_id or str(uuid.uuid4())
@@ -292,6 +295,7 @@ class TuftsLLMProxyAgent(BaseUltimatumAgent):
             query=self.splitter_turn_prompt,
             output_schema=SplitterResponse,
             session_id=self.session_id,
+            lastk=self.lastk,
             system=self.system_prompt,
         )
 
@@ -323,6 +327,7 @@ class TuftsLLMProxyAgent(BaseUltimatumAgent):
             query=self.responder_turn_prompt.format(offer=offer),
             output_schema=ResponderResponse,
             session_id=self.session_id,
+            lastk=self.lastk,
             system=self.system_prompt,
         )
 
@@ -357,6 +362,7 @@ class TuftsLLMProxyAgent(BaseUltimatumAgent):
             query=message,
             output_schema=ChatterResponse,
             session_id=self.session_id,
+            lastk=self.lastk,
             system=self.system_prompt,
         )
 
@@ -390,5 +396,6 @@ class TuftsLLMProxyAgent(BaseUltimatumAgent):
             model=self.model,
             query=message,
             session_id=self.session_id,
+            lastk=self.lastk,
             system=self.system_prompt,
         )

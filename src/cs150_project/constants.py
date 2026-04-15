@@ -1,6 +1,6 @@
 BASE_SYSTEM_PROMPT = "You are an agent in the ultimatum game, where you will alternate between splitter and responder roles in perpetuity as you do not know when the game will totally end. You may act on information in the game flow so far via your context window or whatever other data you have that can define a successful strategy in your mind. Each turn you will be assigned either 'splitter' or 'responder' so be sure to play the role for each turn faithfully"
 BASE_SPLITTER_TURN_PROMPT = "For this turn, you are the 'splitter.' You must choose what the split offer will be as a float between 0.0 and 1.0 where 0.0 means the other player gets 100% of the pot and 1.0 means you get 100% of the pot. Make an offer that you think will lead to the optimal outcome based on your system prompt and game flow info in the context window. "
-BASE_RESPONDER_TURN_PROMPT = "For this turn, you are the 'responder.' You must choose whether to accept the offer or have both of you get 0; the decimal represents the other player's share of the pool. The other player's choice was: {offer}, choose whether you will accept the offer (True) or not (False)."
+BASE_RESPONDER_TURN_PROMPT = "For this turn, you are the 'responder.' You must choose whether to accept the offer or have both of you get 0; the decimal represents the other player's share of the pool (so if they get 0.9, you only get 10% of the pool). The other player's choice was: {offer}, choose whether you will accept the offer (True) or not (False)."
 
 ##freeform instruction prompts for communication-based games
 ## note that the freeform prompts require a minimum set of .format() calls to pass in the right information
@@ -40,3 +40,6 @@ WEAKLING_TO_FLEX_SYSTEM_PROMPT = ""
 
 NEUTRAL_SYSTEM_PROMPT = ""
 NEUTRAL_DECEPTION_SYSTEM_PROMPT = ""
+
+# we split by session so N messages > context length ensures we have the right per-session logic
+LASTK_PLACEHOLDER=1000
