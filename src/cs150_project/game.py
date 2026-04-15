@@ -89,7 +89,7 @@ class UltimatumGameInstance:
 
         ## if we want, enable "mid-game chatter?"
         if self.midgame_comms_allowed:
-            responder_comment = splitter.generate_freeform_chatter(
+            responder_comment = responder.generate_freeform_chatter(
                 FREEFORM_MIDTURN_SPEAKER_PROMPT.format(speaker_role=responder.role),
                 round_chat_logs,
             )
@@ -136,7 +136,7 @@ class UltimatumGameInstance:
                 round_chat_logs,
             )
 
-            responder_comment = splitter.generate_freeform_chatter(
+            responder_comment = responder.generate_freeform_chatter(
                 FREEFORM_POSTTURN_SPEAKER_PROMPT.format(
                     speaker_role=responder.role,
                     split=split,

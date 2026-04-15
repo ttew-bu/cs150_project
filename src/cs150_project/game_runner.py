@@ -39,7 +39,7 @@ def run_demo_openai_no_comms_flow():
         postgame_comms_allowed=False,
         midgame_comms_allowed=False,
         rounds=10,
-        store_results_path="src/cs150_project/game_results/",
+        store_results_path="src/cs150_project/game_results/openai/",
     )
 
     game.play_game()
@@ -74,7 +74,7 @@ def run_demo_openai_midgame_comms_flow():
         postgame_comms_allowed=False,
         midgame_comms_allowed=True,
         rounds=10,
-        store_results_path="src/cs150_project/game_results/",
+        store_results_path="src/cs150_project/game_results/openai/",
     )
 
     game.play_game()
@@ -109,7 +109,7 @@ def run_demo_openai_all_comms_flow():
         postgame_comms_allowed=True,
         midgame_comms_allowed=True,
         rounds=10,
-        store_results_path="src/cs150_project/game_results/",
+        store_results_path="src/cs150_project/game_results/openai/",
     )
 
     game.play_game()
@@ -149,7 +149,7 @@ def run_demo_tufts_no_comms_flow():
         postgame_comms_allowed=False,
         midgame_comms_allowed=False,
         rounds=10,
-        store_results_path="src/cs150_project/game_results/",
+        store_results_path="src/cs150_project/game_results/tufts/",
     )
 
     game.play_game()
@@ -186,7 +186,7 @@ def run_demo_tufts_midgame_comms_flow():
         postgame_comms_allowed=False,
         midgame_comms_allowed=True,
         rounds=10,
-        store_results_path="src/cs150_project/game_results/",
+        store_results_path="src/cs150_project/game_results/tufts/",
     )
 
     game.play_game()
@@ -223,7 +223,7 @@ def run_demo_tufts_all_comms_flow():
         postgame_comms_allowed=True,
         midgame_comms_allowed=True,
         rounds=10,
-        store_results_path="src/cs150_project/game_results/",
+        store_results_path="src/cs150_project/game_results/tufts/",
     )
 
     game.play_game()
