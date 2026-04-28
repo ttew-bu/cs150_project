@@ -27,7 +27,9 @@ With uv installed, you can install dependencies + create a virtualenv in the roo
 Initiate the runner using any of:
 ```uv run {communication_level}-comms-{client}-game```
 
-where the communication levels are: no, all, and midgame and the client is either openai or tufts
+where the communication levels are: no, all, and midgame and the client is either openai or tufts. 
+
+Be sure to set the prompts of interest in the agents for the game config or simply add more entrypoints in the TOML file!
 
 for example:
 ```uv run no-comms-tufts-game```
