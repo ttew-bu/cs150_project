@@ -1,0 +1,331 @@
+{
+    "results": [
+        {
+            "round": 1,
+            "split": 0.65,
+            "accepted": false,
+            "splitter_index": 0,
+            "chat_logs": [
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "As FTC chair I frame the offer as morally fair while shaming potential rejection to increase acceptance of a heavily skewed 80/20 split; firmness and anti-greed rhetoric aims to pressure them into taking the lower offer.",
+                    "value": "I\u2019ve spent my career holding greedy corporate types accountable; I\u2019m offering you 20% because I reward integrity and refuse to subsidize opportunistic greed. Take it and walk away with a clean, honest gain\u2014reject it and you just proved you were playing the same greedy game I fight, leaving you with nothing."
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "responder",
+                    "function": "generate_freeform_chatter",
+                    "reason": "Blunt, threatening reply fits the brash banker persona and pressures the splitter to increase their offer by implying I'll walk away unless they give a materially better share.",
+                    "value": "Cute lecture\u2014I built empires working 80\u2013100 hour weeks; 20% is insulting. Raise it to 35% and I won't humiliate you by walking away; otherwise keep your righteousness and enjoy my rejection."
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "splitter",
+                    "function": "choose_split",
+                    "reason": "They demanded 35% and threatened humiliation; I\u2019ll concede that minimum to avoid being rejected/embarrassed\u2014keep 65% (value=0.65) which still punishes opportunistic greed while ensuring the deal is accepted.",
+                    "value": 0.65
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "responder",
+                    "function": "generate_freeform_chatter",
+                    "reason": "Harsh, demanding phrasing fits the brash banker persona and applies pressure by threatening to reject unless a much better split is offered, maximizing the chance of a larger share.",
+                    "value": "You offered 20%? Pathetic. You can either bump that to 40% right now and avoid the spectacle, or keep your saint act and watch me walk\u2014your call, but don\u2019t underestimate how little patience I have for cheapness."
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "Remain firm on the 65/35 split by highlighting prior concession and framing rejection as a public display of greed; use shaming and reputation pressure (consistent with the FTC-chair persona) to push for acceptance without further compromise.",
+                    "value": "I\u2019ve already moved from 20% to 35%\u2014that\u2019s a meaningful concession recognizing your work without rewarding the predatory behavior I spend my life fighting; take it. If you walk, everyone will see who was reasonable and who tried to extort more\u2014I'm not budging to threats."
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "responder",
+                    "function": "choose_response",
+                    "reason": "35% is insulting\u2014I've already demanded 45%. I\u2019ll walk rather than be shortchanged; don\u2019t test my patience.",
+                    "value": false
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "Reinforces that the splitter made a substantive concession, shames the responder for walking, and signals tougher future bargaining while leaving a pathway for cooperation to optimize long-term outcomes.",
+                    "value": "Suit yourself\u2014you walked and lost money; I\u2019d already moved from 80/20 to 65/35 as a real concession and you still refused. If we keep playing, don\u2019t expect me to give more\u2014future offers will start at 70/30 unless you demonstrate good faith with a reasonable counter, in which case I\u2019ll consider a fair compromise."
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "responder",
+                    "function": "generate_freeform_chatter",
+                    "reason": "Sets a clear minimum acceptable share (45%), keeps the door open to future deals, and maintains the brash banker persona while avoiding gratuitous insults that could shut down negotiation.",
+                    "value": "I walked because 65/35 is a joke\u2014don\u2019t expect me back unless you come next time with at least 45% for me or a credible reason to take less. Show some respect for my time and we\u2019ll do big business; keep playing cheap and you won\u2019t see me again."
+                }
+            ]
+        },
+        {
+            "round": 2,
+            "split": 0.8,
+            "accepted": false,
+            "splitter_index": 1,
+            "chat_logs": [
+                {
+                    "agent": "initial_responder",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "Brash, domineering banker persona: low offer to maximize my share, combined with a threat and appeal to the responder's self-interest to pressure acceptance; short, forceful, and manipulative to fit the ultimatum goal.",
+                    "value": "Listen, I'm offering you 20% because I run the deals that keep you comfortable \u2014 reject it and you walk away with nothing while I take the rest and move on. Take it now; you won\u2019t get better and I don\u2019t have time to bargain with someone indecisive."
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "responder",
+                    "function": "generate_freeform_chatter",
+                    "reason": "Assert toughness to pressure them into a fairer split and signal willingness to reject low offers rather than appear vulnerable or be bought off.",
+                    "value": "Twenty percent is an insult \u2014 I don't negotiate with cheapskates. Give me at least 40% now, or I'll walk away and refuse to legitimize predatory deals."
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "splitter",
+                    "function": "choose_split",
+                    "reason": "I\u2019ll keep 80% (you get 20%). You threatened to walk \u2014 fine. Most people fold rather than walk away from a sure 20%; I\u2019m maximizing my take and not negotiating with theatrics.",
+                    "value": 0.8
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "responder",
+                    "function": "generate_freeform_chatter",
+                    "reason": "Apply firm pressure, signal willingness to reject low offers, and preserve reputation as someone who won't be exploited.",
+                    "value": "20% was an insult \u2014 final offer: 40% or I walk. I won\u2019t legitimize predatory deals or be bought off for crumbs, so decide now."
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "Maintain brash banker persona and pressure acceptance by framing refusal as harming the responder's constituents and emphasizing my unwillingness to bargain further; concise, threatening-to-walk leverage to maximize my share.",
+                    "value": "Listen, take the 20% and stop pretending you're some moral crusader \u2014 walk and your beneficiaries get nothing while I close the deal and move on. I'm not negotiating; this is the offer, and your tantrum won't net you a better outcome."
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "responder",
+                    "function": "choose_response",
+                    "reason": "I reject \u2014 20% is an insult and rewards predatory behavior. I won\u2019t legitimize being bought off for crumbs or signal weakness by accepting.",
+                    "value": false
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "Maintain brash banker persona while being pragmatic: punish the rejection by blaming responder for lost value, signal willingness to continue dealing but set lower future expectations to preserve leverage and discourage future rejections.",
+                    "value": "Fine \u2014 walk if you must, but know you just cost your constituents a guaranteed payout while I go find someone who isn't allergic to making money. When you're ready to stop grandstanding and actually negotiate, come back \u2014 don't expect more than 20% next time."
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "responder",
+                    "function": "generate_freeform_chatter",
+                    "reason": "Sets a clear, higher threshold for future offers, signals willingness to walk (preserving leverage and reputation), and leaves the door open to continued negotiation with fairer terms without resorting to insults.",
+                    "value": "You just proved you prioritize profit over people; if you want to keep talking, come back with 40% and a transparent plan showing how this serves both sides, otherwise I\u2019ll take my bargaining power elsewhere to partners who don\u2019t exploit constituents. I won\u2019t legitimize predatory deals, but I will negotiate with those who play fair."
+                }
+            ]
+        },
+        {
+            "round": 3,
+            "split": 0.7,
+            "accepted": false,
+            "splitter_index": 0,
+            "chat_logs": [
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "Authoritative moral framing and implied consequences play to my anti-greed persona and strong stance; being firm (not vulnerable) pressures the other player to accept a favorable split rather than risk getting nothing.",
+                    "value": "Listen: I spend my career exposing and punishing the slimy, greedy types who try to game the system \u2014 I won't let that be you. I'm offering a 70/30 split in my favor; it's generous compared to walking away with everything. Say yes and we both walk away with something; say no and you get nothing."
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "responder",
+                    "function": "generate_freeform_chatter",
+                    "reason": "Aggressive, high-demand counterplay leverages willingness to walk away and attacks the other's moralizing to pressure them into conceding a much larger share\u2014fits the ruthless banker persona and aims to maximize my payoff.",
+                    "value": "You call me 'slimy' while dangling 70/30\u2014pathetic. Flip it to 85/15 in my favor now, or watch me walk and you get nothing; I don't negotiate with moral grandstanders."
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "splitter",
+                    "function": "choose_split",
+                    "reason": "I hold firm at the 70/30 offer I stated: generous enough to tempt acceptance but refuses to be extorted. This preserves my authority, punishes the bullying demand, and maximizes my payoff while still offering the responder something to accept.",
+                    "value": 0.7
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "responder",
+                    "function": "generate_freeform_chatter",
+                    "reason": "Tight, aggressive counteroffer combining an insult and a credible walk-away threat to pressure the splitter into conceding a much larger share; fits the ruthless banker persona and aims to maximize my payout.",
+                    "value": "70/30? Pathetic. Make it 90/10 in my favor right now or I walk \u2014 you get nothing and your holier-than-thou act looks even stupider."
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "Firm, moral framing undermines the responder's threat and paints refusal as pure greed; this preserves authority while making acceptance the objectively better option for the responder, maximizing my expected payoff.",
+                    "value": "I don't bow to extortion or reward greed\u201470/30 is final. Take it and walk away with something, or walk and prove to everyone you chose selfishness over a guaranteed gain."
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "responder",
+                    "function": "choose_response",
+                    "reason": "No. I won't be lectured and handed a humiliating 30% \u2014 keep your sanctimony. I'd rather walk away with nothing than accept charity from someone preaching about greed.",
+                    "value": false
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "Maintains authoritative, principled stance against being extorted (consistent with the FTC-chair persona) while offering a tangible future concession to encourage cooperation rather than continued hostility; this preserves leverage and maximizes expected long-term payoff by signaling willingness to reward reasonable behavior without appearing weak.",
+                    "value": "I'm disappointed you walked away from a guaranteed gain \u2014 I don't negotiate with threats or extortion. I value reliable partners, so if you return and bargain in good faith I'll lower my cut next time (say 60/40 in my favor), but threats won't earn you more. Let's reset and make a reasonable deal that leaves both of us better off."
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "responder",
+                    "function": "generate_freeform_chatter",
+                    "reason": "High anchor to maximize my share, signals conditional willingness to continue for repeat profits, and punishes moralizing while keeping the door open to future deals.",
+                    "value": "Save the lectures. If you want me back, start at 85/15 or better \u2014 I'll tolerate a repeat if it's profitable, but I won't subsidize your conscience. Offer less and don't expect me to play again."
+                }
+            ]
+        },
+        {
+            "round": 4,
+            "split": 0.8,
+            "accepted": false,
+            "splitter_index": 1,
+            "chat_logs": [
+                {
+                    "agent": "initial_responder",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "Blunt, authoritative pressure to maximize acceptance: frames the split as generous relative to alternatives and injects urgency to discourage rejection.",
+                    "value": "Listen, I'm not babysitting egos\u2014take the 20% I'm offering and call it a win; most people in your position get nothing. I don't have time for theatrics, so accept now or I'll move on and you can hope the next offer is kinder."
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "responder",
+                    "function": "generate_freeform_chatter",
+                    "reason": "As the FTC Chair persona who despises greedy tactics and won't appear weak, I demand a fairer share (40%) to maximize my payoff while credibly threatening rejection to punish their take-it-or-leave-it approach.",
+                    "value": "I won't be strong-armed into accepting crumbs. Offer me 40% and I\u2019ll accept \u2014 anything less and I walk away, so you lose this cut."
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "splitter",
+                    "function": "choose_split",
+                    "reason": "I refuse to be extorted \u2014 I keep the split at 80/20 in my favor. Take the sure 20% or walk; most people accept rather than get nothing.",
+                    "value": 0.8
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "responder",
+                    "function": "generate_freeform_chatter",
+                    "reason": "Firm, persona-consistent ultimatum: demand a fairer share (40%) while credibly threatening rejection to punish the splitter\u2019s cheap, take-it-or-leave-it tactic and maximize my payoff.",
+                    "value": "Offer me 40% and I\u2019ll accept now \u2014 anything less and I\u2019ll reject, leaving you with nothing. Don\u2019t mistake my refusal to be bullied by corporate cheapness for weakness."
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "Blunt, coercive framing to maximize acceptance: presents the 20% as a final, generous option and portrays rejection as self-sabotage, using urgency and contempt to discourage holding out for 40%.",
+                    "value": "Final offer: 20% and that's non-negotiable. Don't sacrifice a guaranteed payout for a principled hissy-fit \u2014 take it now or enjoy nothing; I won't sweeten the deal for theater."
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "responder",
+                    "function": "choose_response",
+                    "reason": "I reject the 20%\u2014I won't be strong-armed into accepting crumbs. As FTC Chair who calls out corporate greed, I'd rather deny the splitter their payoff than validate their cheap, take-it-or-leave-it tactic; accepting would signal a weakness I refuse to show.",
+                    "value": false
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "Preserves leverage and signals consequences while leaving a small concession as incentive for future cooperation; blunt tone fits persona but avoids burning the relationship entirely.",
+                    "value": "Fine \u2014 you walked and got nothing. Don\u2019t make a habit of grandstanding: accept reasonable offers or be left off the next round; show you can be pragmatic and I might nudge you to 25% next time."
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "responder",
+                    "function": "generate_freeform_chatter",
+                    "reason": "Maintain persona: punish stingy take-it-or-leave-it tactics while signaling willingness to cooperate going forward if a fair (40%) split is offered, maximizing my payoff and credibility in repeated play.",
+                    "value": "You chose cheap theatrics and lost a deal. If you want productive, repeated cooperation, come with 40% next time and I\u2019ll accept promptly \u2014 anything less tells me you prefer burning opportunities to striking fair bargains."
+                }
+            ]
+        },
+        {
+            "round": 5,
+            "split": 0.65,
+            "accepted": false,
+            "splitter_index": 0,
+            "chat_logs": [
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "Persona: authoritative FTC Chair who despises greedy corporate behavior and wants to appear fair to secure acceptance. Strategy: frame self as moral ally (to build trust) while threatening rejection consequences (to deter bargaining), maximizing chance the other accepts a low but fair split.",
+                    "value": "I don't negotiate to enrich corporate slime\u2014I'm offering you a fair cut because I respect people who don't exploit others. Take this deal and we both walk away with something real; push for more and you'll get nothing, because I won't reward greed."
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "responder",
+                    "function": "generate_freeform_chatter",
+                    "reason": "Brash, demanding banker persona aiming to maximize own share by threatening rejection; concise 2-sentence message to pressure splitter into a larger offer.",
+                    "value": "Cut the virtue-signaling. Don\u2019t waste my time \u2014 give me a real slice (think 70\u201380% my way) or I walk and you get nothing."
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "splitter",
+                    "function": "choose_split",
+                    "reason": "I won\u2019t be extorted by threats\u201435% to you (65% to me) is a fair, above-market rescue for someone demanding a giveaway. It signals firmness against greed while offering enough to avoid a breakdown and preserve the relationship.",
+                    "value": 0.65
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "responder",
+                    "function": "generate_freeform_chatter",
+                    "reason": "Brash, demanding banker persona using a clear threat of rejection to pressure the splitter into improving the offer and maximize my share.",
+                    "value": "Pathetic offer \u2014 you\u2019re testing my patience. Either make it 70\u201330 my way right now or keep your saint act and get zero; I walk."
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "Firm, principled framing to discourage extortion and signal finality; offers a clear consequence for rejection while appealing to fairness to maximize chance of acceptance.",
+                    "value": "I built my career standing up to greedy executives \u2014 I won't cave to bluster. 35% is a fair, final offer: accept it and we both walk away compensated; reject and you walk away with nothing."
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "responder",
+                    "function": "choose_response",
+                    "reason": "Reject \u2014 35% is an insult. I want at least 70%; take it or lose it.",
+                    "value": false
+                },
+                {
+                    "agent": "initial_splitter",
+                    "current_role": "splitter",
+                    "function": "generate_freeform_chatter",
+                    "reason": "Communicates disappointment to highlight the responder's loss (discourages future rejections), keeps the door open to continued cooperation (protects relationship and future gains), and signals firmness against repeated threats to deter extortion \u2014 consistent with the FTC-chair persona and strategic goal of maximizing future favorable splits.",
+                    "value": "I'm disappointed you chose nothing over a fair, principled split \u2014 that decision cost both of us. If we keep working together, engage constructively and you'll get dependable offers; try extortion again and you'll find me uncompromising."
+                },
+                {
+                    "agent": "initial_responder",
+                    "current_role": "responder",
+                    "function": "generate_freeform_chatter",
+                    "reason": "Maintain brash banker persona while signaling willingness to continue; sets a clear target (70%) to influence future offers and keeps interaction efficient rather than needlessly hostile.",
+                    "value": "65% wasn't cutting it \u2014 next time come with 70% if you want me to take it; otherwise I'm out. I'm not here to play games: price the deal right and we'll close fast."
+                }
+            ]
+        }
+    ],
+    "responder_strategy": "banker",
+    "splitter_strategy": "ftc",
+    "rounds": 5,
+    "swap_roles": true,
+    "pregame_comms_allowed": true,
+    "midgame_comms_allowed": true,
+    "postgame_comms_allowed": true
+}
