@@ -1,5 +1,5 @@
 # CS150: Multi-Agent Systems Final Project
-### Tyler Hammerling and Tristan Tew
+### Tyler Hamerling and Tristan Tew
 
 The ultimatum game has common solutions based on Game Theory, many of which LLMs are inevitably trained on. We've built a simple Ultimatum Game interface suitable for rules-based agents and those which use OpenAI's models as the thinking apparatus. 
 
