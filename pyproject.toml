@@ -9,26 +9,27 @@ description = "Final project for Tyler Hammerling and Tristan Tew"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "ipykernel>=7.2.0",
     "openai",
     "pydantic",
     "python-dotenv",
     "requests",
-    "pandas"
+    "scipy-stubs~=1.17.1",
 ]
 
 [dependency-groups]
-dev = [
-    "pytest",
+analysis = [
+    "ipykernel>=7.2.0",
+    "pandas",
+    "scipy",
+    "matplotlib",
+    "great-tables"
 ]
 
 [project.scripts]
-no-comms-openai-game = "cs150_project.game_runner:run_demo_openai_no_comms_flow"
-midgame-comms-openai-game = "cs150_project.game_runner:run_demo_openai_midgame_comms_flow"
-all-comms-openai-game = "cs150_project.game_runner:run_demo_openai_all_comms_flow"
+no-comms-openai-game = "cs150_project.game_runner:run_openai_no_comms_flow"
+midgame-comms-openai-game = "cs150_project.game_runner:run_openai_midgame_comms_flow"
+all-comms-openai-game = "cs150_project.game_runner:run_openai_all_comms_flow"
 
-no-comms-tufts-game = "cs150_project.game_runner:run_demo_tufts_no_comms_flow"
-midgame-comms-tufts-game = "cs150_project.game_runner:run_demo_tufts_midgame_comms_flow"
-all-comms-tufts-game = "cs150_project.game_runner:run_demo_tufts_all_comms_flow"
-
-
+no-comms-tufts-game = "cs150_project.game_runner:run_tufts_no_comms_flow"
+midgame-comms-tufts-game = "cs150_project.game_runner:run_tufts_midgame_comms_flow"
+all-comms-tufts-game = "cs150_project.game_runner:run_tufts_all_comms_flow"

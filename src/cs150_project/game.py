@@ -174,6 +174,18 @@ class UltimatumGameInstance:
             else:
                 self.splitter_index = 0
 
+        if isinstance(splitter, OpenAIUltimatumAgent):
+            splitter.reset_response_id()
+
+        if isinstance(splitter, TuftsLLMProxyAgent):
+            splitter.reset_session_id()
+
+        if isinstance(responder, OpenAIUltimatumAgent):
+            responder.reset_response_id()
+
+        if isinstance(responder, TuftsLLMProxyAgent):
+            responder.reset_session_id()
+
     def play_game(self) -> None | dict[Any, str]:
         """Run through N iterations of the game with the game settings
         for history and communication allowance"""

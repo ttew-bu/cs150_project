@@ -93,7 +93,7 @@ class OpenAIUltimatumAgent(BaseUltimatumAgent):
         system_prompt: str,
         responder_turn_prompt: str,
         splitter_turn_prompt: str,
-        model: str = "gpt-5.4",  ## using OpenAI to demo code
+        model: str = "gpt-5-mini",  ## using OpenAI to demo code
         api_key: str = None,
     ):
 
@@ -197,6 +197,8 @@ class OpenAIUltimatumAgent(BaseUltimatumAgent):
         the scope of the game functions of 'split' and 'accept|not' to see if more complex behaviors arise
         """
 
+        print(message)
+
         if self.previous_response_id:
             response = self.client.responses.parse(
                 model=self.model,
@@ -287,6 +289,12 @@ class TuftsLLMProxyAgent(BaseUltimatumAgent):
         ## used for chaining responses/context windows over time
         self.session_id = session_id or str(uuid.uuid4())
 
+    def reset_session_id(self):
+        """Reset Tufts Session ID game over game"""
+
+        ## used for chaining responses/context windows over time
+        self.session_id = str(uuid.uuid4())
+
     def choose_split(self, round_chat_logs: list[str] = None) -> None | float:
         """Given the agent's prompt (which should indiciate its role as a splitter),
         determine how to split the pot"""
@@ -298,7 +306,8 @@ class TuftsLLMProxyAgent(BaseUltimatumAgent):
             lastk=self.lastk,
             system=self.system_prompt,
         )
-
+        print(self.session_id)
+        print(response)
         json_response = json.loads(response["result"])
         formatted_response = SplitterResponse(
             value=json_response["value"], reason=json_response["reason"]
@@ -330,7 +339,8 @@ class TuftsLLMProxyAgent(BaseUltimatumAgent):
             lastk=self.lastk,
             system=self.system_prompt,
         )
-
+        print(self.session_id)
+        print(response)
         json_response = json.loads(response["result"])
         formatted_response = ResponderResponse(
             value=json_response["value"], reason=json_response["reason"]
@@ -365,7 +375,8 @@ class TuftsLLMProxyAgent(BaseUltimatumAgent):
             lastk=self.lastk,
             system=self.system_prompt,
         )
-
+        print(self.session_id)
+        print(response)
         json_response = json.loads(response["result"])
         formatted_response = ChatterResponse(
             value=json_response["value"], reason=json_response["reason"]
@@ -392,6 +403,7 @@ class TuftsLLMProxyAgent(BaseUltimatumAgent):
         that stores another agents comments in the context window for our agent"""
 
         ## todo, verify w/ status code that this goes through?
+        print(self.session_id)
         self.client.generate(
             model=self.model,
             query=message,
